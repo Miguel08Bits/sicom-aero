@@ -1,0 +1,21 @@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Latitud</th>
+            <th scope="col">Longitud</th>
+            <th scope="col">Población</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let space of espacios">
+            <td>{{ space[0].id }}</td>
+            <td>{{ space.name }}</td>
+            <td>{{ space.latitude }}</td>
+            <td>{{ space.longitude }}</td>
+            <td>{{ space.population }}</td>
+        <tr>    
+    </tbody>
+  </table>
+  
