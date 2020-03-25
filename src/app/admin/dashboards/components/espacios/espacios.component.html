@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-hover">
     <thead class="thead-dark">
         <tr>
             <th scope="col">ID</th>
@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         <tr *ngFor = "let space of espacios">
-            <td>{{ space[0].id }}</td>
+            <td>{{ space.id }}</td>
             <td>{{ space.name }}</td>
             <td>{{ space.latitude }}</td>
             <td>{{ space.longitude }}</td>

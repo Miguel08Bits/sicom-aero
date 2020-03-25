@@ -18,9 +18,8 @@ export class EspaciosComponent implements OnInit {
   getEspacios(){
     this.spaces.allSpaces().subscribe(
       (resp) => {
-        for(var i=0; i<resp.length; i++){
-          this.espacios = resp[i];
-          console.log(this.espacios);
+        for (var i = 0; i < resp.length; i++) {
+        this.espacios.push(resp[i]);
         }
       },
       (err) => {
