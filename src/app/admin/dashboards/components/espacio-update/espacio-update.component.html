@@ -2,46 +2,46 @@
     Espacios
 </h1>
 <hr>
-<form autocomplete="off" >
+<form autocomplete="off" [formGroup]="forma" (ngSubmit)="actualizar()">
     <div class="form-group">
         <label> Nombre: </label><br>
-        <input type="text" class="form-control" placeholder="">
-        <!-- <small class="text-danger" *ngIf="nombreNoValido">
+        <input type="text" class="form-control" placeholder="" formControlName="nombreNoValido" [class.is-invalid]="nombreNoValido">
+        <small class="text-danger" *ngIf="nombreNoValido">
             El nombre debe ser por lo menos de 3 caracteres, comenzar con mayúscula y no contener caracteres especiales.
-        </small> -->
+        </small>
     </div>
     <div class="form-group">
         <label> Latitud: </label><br>
-        <input type="text" class="form-control" placeholder="">
-        <!-- <small class="text-danger" *ngIf="latitudNoValida">
+        <input type="text" class="form-control" placeholder="" formControlName="latitudNoValida" [class.is-invalid]="latitudNoValida">
+        <small class="text-danger" *ngIf="latitudNoValida">
             Latitud incorrecta. Formato de latitud: -89.00000 ú 89.00000
-        </small> -->
+        </small>
     </div>
     <div class="form-group">
         <label> Longitud: </label><br>
-        <input type="text" class="form-control" placeholder="">
-        <!-- <small class="text-danger" *ngIf="longitudNoValida">
+        <input type="text" class="form-control" placeholder="" formControlName="longitudNoValida" [class.is-invalid]="longitudNoValida">
+        <small class="text-danger" *ngIf="longitudNoValida">
             Longitud incorrecta. Formato de longitud: -179.00000 ó 179.00000
-        </small> -->
+        </small>
     </div>
     <div class="form-group">
         <label> Espacio: </label><br>
         <select class="form-control">
-            <option value="">Seleccione un tipo de espacio...</option>
-            <!-- <option *ngFor="let espacio of tipo_espacio" [ngValue]="espacio.id" [disabled]="tipo_espacio.length === 1">{{espacio.name}}</option> -->
+            <option formControlName="espacioNoValido" [class.is-invalid]="espacioNoValido" value="">Seleccione un tipo de espacio...</option>
+            <option *ngFor="let space of tipo_espacio" [ngValue]="space.id" [disabled]="tipo_espacio.length === 1">{{space.name}}</option>
         </select>
-        <!-- <small class="text-danger" *ngIf="espacioNoValido">
+        <small class="text-danger" *ngIf="espacioNoValido">
             Seleccione un espacio de la lista.
-        </small> -->
+        </small>
     </div>
 
     <div class="form-group">
         <label> Población: </label><br>
-        <input type="tel" class="form-control" placeholder="">
+        <input type="tel" class="form-control" placeholder="" formControlName="poblacionNoValida" [class.is-invalid]="poblacionNoValida">
     </div>
-    <!-- <small class="text-danger" *ngIf="poblacionNoValida">
+    <small class="text-danger" *ngIf="poblacionNoValida">
         La población debe ser mayor a 1000 habitantes.
-    </small> -->
+    </small>
 
     <!-- <div class="form-group">
         <label for="file">Archivo: </label>

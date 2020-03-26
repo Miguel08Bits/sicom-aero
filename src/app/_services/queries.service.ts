@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class QueriesService {
 
   // HEADERS //
   headers = new HttpHeaders({
@@ -38,5 +38,13 @@ export class LoginService {
   allSpaces(){
     return this.getQuery('spaces').pipe(map(data => data['data']));
   }
+
+  spaceById(_id : number){
+    return this.getQuery('spaces/'+_id).pipe(map(data => data['data']));
   
+  }
+
+  updateEspacio(_id: number, data){
+    return this.postQuery('spaces/'+_id, data, this.headers);
+  }
 }

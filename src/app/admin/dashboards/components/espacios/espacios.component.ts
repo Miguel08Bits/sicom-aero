@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/_services/login.service';
+import { QueriesService } from 'src/app/_services/queries.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ export class EspaciosComponent implements OnInit {
 
   espacios : any[] = [];
 
-  constructor(private spaces : LoginService, private router: Router) { this.getEspacios();  }
+  constructor(private spaces : QueriesService, private router: Router) { this.getEspacios();  }
 
   ngOnInit(): void {
   }

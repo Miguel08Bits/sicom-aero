@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoginService } from '../_services/login.service';
+import { QueriesService } from '../_services/queries.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   emailPattern: string = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$';
 
-  constructor(private fb: FormBuilder, private auth : LoginService, private toastr: ToastrService, private router : Router) {
+  constructor(private fb: FormBuilder, private auth : QueriesService, private toastr: ToastrService, private router : Router) {
     this.crearFormulario();
   }
 
