@@ -6,6 +6,7 @@
             <th scope="col">Latitud</th>
             <th scope="col">Longitud</th>
             <th scope="col">Población</th>
+            <th></th>
       </tr>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
             <td>{{ space.latitude }}</td>
             <td>{{ space.longitude }}</td>
             <td>{{ space.population }}</td>
+            <td (click)="updateEspacio(space)" class="btn btn-primary">Editar</td>
         <tr>    
     </tbody>
   </table>

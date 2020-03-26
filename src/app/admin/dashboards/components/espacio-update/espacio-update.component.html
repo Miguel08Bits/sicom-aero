@@ -1,0 +1,65 @@
+<h1>
+    Espacios
+</h1>
+<hr>
+<form autocomplete="off" >
+    <div class="form-group">
+        <label> Nombre: </label><br>
+        <input type="text" class="form-control" placeholder="">
+        <!-- <small class="text-danger" *ngIf="nombreNoValido">
+            El nombre debe ser por lo menos de 3 caracteres, comenzar con mayúscula y no contener caracteres especiales.
+        </small> -->
+    </div>
+    <div class="form-group">
+        <label> Latitud: </label><br>
+        <input type="text" class="form-control" placeholder="">
+        <!-- <small class="text-danger" *ngIf="latitudNoValida">
+            Latitud incorrecta. Formato de latitud: -89.00000 ú 89.00000
+        </small> -->
+    </div>
+    <div class="form-group">
+        <label> Longitud: </label><br>
+        <input type="text" class="form-control" placeholder="">
+        <!-- <small class="text-danger" *ngIf="longitudNoValida">
+            Longitud incorrecta. Formato de longitud: -179.00000 ó 179.00000
+        </small> -->
+    </div>
+    <div class="form-group">
+        <label> Espacio: </label><br>
+        <select class="form-control">
+            <option value="">Seleccione un tipo de espacio...</option>
+            <!-- <option *ngFor="let espacio of tipo_espacio" [ngValue]="espacio.id" [disabled]="tipo_espacio.length === 1">{{espacio.name}}</option> -->
+        </select>
+        <!-- <small class="text-danger" *ngIf="espacioNoValido">
+            Seleccione un espacio de la lista.
+        </small> -->
+    </div>
+
+    <div class="form-group">
+        <label> Población: </label><br>
+        <input type="tel" class="form-control" placeholder="">
+    </div>
+    <!-- <small class="text-danger" *ngIf="poblacionNoValida">
+        La población debe ser mayor a 1000 habitantes.
+    </small> -->
+
+    <!-- <div class="form-group">
+        <label for="file">Archivo: </label>
+        <input type="file" id="file" (change)="getFileDetails($event.target.files)" class="form-control-file" formControlName="archivo" [class.is-invalid] = "archivoNoValido" >
+    </div>
+    <small class="text-danger" *ngIf = "archivoNoValido">
+        El archivo no debe ser mayor a 2 MB y ser de tipo .jpg o .pdf
+    </small>      -->
+
+    <!-- <div class="form-group">
+        <label>Archivo: </label>
+    </div>
+    <input type="file" class="form-control" formControlName="archivo" [class.is-invalid] = "getFileDetails() == false || archivoNoValido" (change) = "getFileDetails">
+-->
+    <div class="form-group">
+        <label>&nbsp;</label>
+        <div class="input-group">
+            <button class="btn btn-primary" type="submit">Guardar cambios</button>
+        </div>
+    </div>
+</form>
