@@ -27,8 +27,8 @@
     </div>
     <div class="form-group">
         <label> Espacio: </label><br>
-        <select class="form-control">
-            <option formControlName="espacio" [class.is-invalid]="espacioNoValido" value="">Seleccione un tipo de espacio...</option>
+        <select class="form-control" formControlName="espacio" [class.is-invalid]="espacioNoValido">
+            <option value="">Seleccione un tipo de espacio...</option>
             <option *ngFor="let space of tipo_espacio" [ngValue]="space.id" [disabled]="tipo_espacio.length === 1">{{space.name}}</option>
         </select>
         <small class="text-danger" *ngIf="espacioNoValido">

@@ -13,13 +13,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class EspacioUpdateComponent implements OnInit {
 
   public espacio: any;
-  tipo_espacio: any;
-  id: string;
+  tipo_espacio: any[] = [];
   forma: FormGroup;
   maxSize: number = 2000000;
   nombresPersonales: string = '([A-Z][a-zA-Z]*)';
 
-  constructor( private activatedRoute: ActivatedRoute, private fb: FormBuilder, private queries : QueriesService) { }
+  constructor( private activatedRoute: ActivatedRoute, private fb: FormBuilder, private queries : QueriesService) {this.crearFormulario(); this.getEspacios();}
 
   ngOnInit(): void {
 
@@ -52,13 +51,12 @@ export class EspacioUpdateComponent implements OnInit {
   getEspacios(){
     this.queries.allSpaces().subscribe(
       (resp) => {
-        for(var i = 0; i < resp.length; i++){
-          this.tipo_espacio[i] = resp[i];
-        }
-      },
-      (err) => console.log(err)
-      );
-      return this.tipo_espacio;
+          this.tipo_espacio.push(resp);
+          console.log(this.tipo_espacio);    
+     },
+      (err) => {console.log(err)}
+        );
+        return this.tipo_espacio;
     }
 
 
@@ -83,6 +81,7 @@ export class EspacioUpdateComponent implements OnInit {
    }
 
    actualizaEspacio(){
+
     const formData = new FormData();
     formData.append('name', this.forma.get('nombre').value);
     formData.append('space_type_id', this.forma.get('espacio').value);
@@ -90,7 +89,7 @@ export class EspacioUpdateComponent implements OnInit {
     formData.append('longitude', this.forma.get('longitud').value);
     formData.append('population', this.forma.get('poblacion').value);
     // formData.append('file', this.forma.get('archivo').value);
-    this.queries.updateEspacio(formData).subscribe(
+    this.queries.updateEspacio(this.activatedRoute.snapshot.paramMap.get("id"), formData).subscribe(
       (resp: any) => {
         console.log("Actualización exitosa ");
         // this.toastr.success("Registro exitoso")

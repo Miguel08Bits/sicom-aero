@@ -43,7 +43,7 @@ export class QueriesService {
     return this.getQuery('spaces/'+id).pipe(map(data => data['data']));
   }
 
-  updateEspacio(data){
-    return this.postQuery('spaces/', data, this.headers);
+  updateEspacio(id: string, data){
+    return this.postQuery('spaces/'+id, data, this.headers);
   }
 }
