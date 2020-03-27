@@ -39,12 +39,11 @@ export class QueriesService {
     return this.getQuery('spaces').pipe(map(data => data['data']));
   }
 
-  spaceById(_id : number){
-    return this.getQuery('spaces/'+_id).pipe(map(data => data['data']));
-  
+  spaceById(id: string){
+    return this.getQuery('spaces/'+id).pipe(map(data => data['data']));
   }
 
-  updateEspacio(_id: number, data){
-    return this.postQuery('spaces/'+_id, data, this.headers);
+  updateEspacio(data){
+    return this.postQuery('spaces/', data, this.headers);
   }
 }

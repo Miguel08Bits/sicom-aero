@@ -13,8 +13,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class EspacioUpdateComponent implements OnInit {
 
   public espacio: any;
-  tipo_espacio: any[]
-  id: number;
+  tipo_espacio: any;
+  id: string;
   forma: FormGroup;
   maxSize: number = 2000000;
   nombresPersonales: string = '([A-Z][a-zA-Z]*)';
@@ -23,7 +23,8 @@ export class EspacioUpdateComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.activatedRoute.params);
+    // console.log(this.activatedRoute.params);
+    this.getSpaceById(this.activatedRoute.snapshot.paramMap.get("id"));
   }
 
   crearFormulario(){
@@ -36,7 +37,19 @@ export class EspacioUpdateComponent implements OnInit {
     })
   }
 
-  getEspacio(){
+  getSpaceById(id: string){
+    
+    this.queries.spaceById(id).subscribe(
+      (resp) => {
+        console.log(resp)
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
+
+  getEspacios(){
     this.queries.allSpaces().subscribe(
       (resp) => {
         for(var i = 0; i < resp.length; i++){
@@ -69,27 +82,28 @@ export class EspacioUpdateComponent implements OnInit {
      return this.forma.get('poblacion').invalid && this.forma.get('poblacion').touched;
    }
 
-  //  actualizaEspacio(){
-  //   const formData = new FormData();
-  //   formData.append('name', this.forma.get('nombre').value);
-  //   formData.append('space_type_id', this.forma.get('espacio').value);
-  //   formData.append('latitude', this.forma.get('latitud').value);
-  //   formData.append('longitude', this.forma.get('longitud').value);
-  //   formData.append('population', this.forma.get('poblacion').value);
-  //   // formData.append('file', this.forma.get('archivo').value);
-  //   this.queries.updateEspacio(this.id, formData).subscribe(
-  //     (resp: any) => {
-  //       console.log("Actualización exitosa ");
-  //       // this.toastr.success("Registro exitoso")
-  //     }
-  //     ,
-  //     (err: HttpErrorResponse) => {
-  //       // this.toastr.error("Hubo un error con el registro, favor de verificar los datos", err.error.message)
+   actualizaEspacio(){
+    const formData = new FormData();
+    formData.append('name', this.forma.get('nombre').value);
+    formData.append('space_type_id', this.forma.get('espacio').value);
+    formData.append('latitude', this.forma.get('latitud').value);
+    formData.append('longitude', this.forma.get('longitud').value);
+    formData.append('population', this.forma.get('poblacion').value);
+    // formData.append('file', this.forma.get('archivo').value);
+    this.queries.updateEspacio(formData).subscribe(
+      (resp: any) => {
+        console.log("Actualización exitosa ");
+        // this.toastr.success("Registro exitoso")
+      }
+      ,
+      (err: HttpErrorResponse) => {
+        // this.toastr.error("Hubo un error con el registro, favor de verificar los datos", err.error.message)
         
-  //       console.log("Actualización sin éxito ");
-  //     }
-  //   )
-  //  }
-
-
+        console.log("Actualización sin éxito ");
+      }
+    )
+   }
 }
+
+
+
