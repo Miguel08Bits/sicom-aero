@@ -30,14 +30,19 @@ export class QueriesService {
     const url = `http://167.99.156.228:8080/api/${query}`;
     return this.http.post(url, data);
   }
-
+  ////////////////////////////////
   usuarioLogin(data){
     return this.postQuery('auth/login', data, this.headers);
+  }
+  
+  getListaEspacios(){
+    return this.getQuery('spaceTypes').pipe(map(data => data['data']));
   }
 
   allSpaces(){
     return this.getQuery('spaces').pipe(map(data => data['data']));
   }
+
 
   spaceById(id: string){
     return this.getQuery('spaces/'+id).pipe(map(data => data['data']));

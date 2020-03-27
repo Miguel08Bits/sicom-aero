@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { QueriesService } from 'src/app/_services/queries.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-espacio-update',
@@ -13,12 +14,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class EspacioUpdateComponent implements OnInit {
 
   public espacio: any;
-  tipo_espacio: any[] = [];
+  tipo_espacio: any[] = [{
+    id: null,
+    nombre: null
+  }];
   forma: FormGroup;
   maxSize: number = 2000000;
   nombresPersonales: string = '([A-Z][a-zA-Z]*)';
 
-  constructor( private activatedRoute: ActivatedRoute, private fb: FormBuilder, private queries : QueriesService) {this.crearFormulario(); this.getEspacios();}
+  constructor( private activatedRoute: ActivatedRoute, private fb: FormBuilder, private queries : QueriesService, private toastr : ToastrService) {this.crearFormulario(); this.getEspacios();}
 
   ngOnInit(): void {
 
@@ -49,14 +53,15 @@ export class EspacioUpdateComponent implements OnInit {
   }
 
   getEspacios(){
-    this.queries.allSpaces().subscribe(
+    this.queries.getListaEspacios().subscribe(
       (resp) => {
-          this.tipo_espacio.push(resp);
-          console.log(this.tipo_espacio);    
-     },
-      (err) => {console.log(err)}
-        );
-        return this.tipo_espacio;
+        for(var i = 0; i < resp.length; i++){
+          this.tipo_espacio[i] = resp[i];
+        }
+      },
+      (err) => console.log(err)
+      );
+      return this.tipo_espacio;
     }
 
 
@@ -91,14 +96,13 @@ export class EspacioUpdateComponent implements OnInit {
     // formData.append('file', this.forma.get('archivo').value);
     this.queries.updateEspacio(this.activatedRoute.snapshot.paramMap.get("id"), formData).subscribe(
       (resp: any) => {
-        console.log("Actualización exitosa ");
-        // this.toastr.success("Registro exitoso")
+        //console.log("Actualización exitosa ");
+         this.toastr.success("Registro exitoso")
       }
       ,
       (err: HttpErrorResponse) => {
-        // this.toastr.error("Hubo un error con el registro, favor de verificar los datos", err.error.message)
-        
-        console.log("Actualización sin éxito ");
+        this.toastr.error("Hubo un error con el registro, favor de verificar los datos", err.error.message)
+        //console.log("Actualización sin éxito ");
       }
     )
    }
