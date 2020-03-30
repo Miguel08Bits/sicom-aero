@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { QueriesService } from 'src/app/_services/queries.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -64,6 +64,19 @@ export class EspacioUpdateComponent implements OnInit {
       return this.tipo_espacio;
     }
 
+    guardar(){
+      console.log(this.forma);
+      if(this.forma.invalid){
+        return Object.values(this.forma.controls).forEach(control =>{
+          if(control instanceof FormGroup){
+              Object.values(control.controls).forEach(control => control.markAsTouched());
+          }else{
+            control.markAsTouched();
+          }
+        });
+      }
+      this.actualizaEspacio();
+    }
 
 
   get nombreNoValido(){
@@ -86,7 +99,6 @@ export class EspacioUpdateComponent implements OnInit {
    }
 
    actualizaEspacio(){
-
     const formData = new FormData();
     formData.append('name', this.forma.get('nombre').value);
     formData.append('space_type_id', this.forma.get('espacio').value);
@@ -97,14 +109,15 @@ export class EspacioUpdateComponent implements OnInit {
     this.queries.updateEspacio(this.activatedRoute.snapshot.paramMap.get("id"), formData).subscribe(
       (resp: any) => {
         //console.log("Actualización exitosa ");
-         this.toastr.success("Registro exitoso")
+         this.toastr.success("Actualización de espacio exitosa")
       }
       ,
       (err: HttpErrorResponse) => {
-        this.toastr.error("Hubo un error con el registro, favor de verificar los datos", err.error.message)
+        this.toastr.error("Hubo un error con la actualización del espacio, favor de verificar los datos", err.error.message)
         //console.log("Actualización sin éxito ");
       }
-    )
+    );
+        
    }
 }
 

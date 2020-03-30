@@ -3,11 +3,11 @@
 </h1>
 <hr>
 
-<form autocomplete="off" [formGroup]="forma" (ngSubmit)="actualizaEspacio()">
+<form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
     <div class="form-group">
         <label> Nombre: </label><br>
         <input type="text" class="form-control" placeholder="" formControlName="nombre" [class.is-invalid]="nombreNoValido">
-        <small class="text-danger" *ngIf="nombreNoValido">
+        <small class="text-danger" *ngIf="nombreNoValido" >
             El nombre debe ser por lo menos de 3 caracteres, comenzar con mayúscula y no contener caracteres especiales.
         </small>
     </div>
@@ -51,3 +51,15 @@
         </div>
     </div>
 </form>
+
+<pre>
+    Estado del formulario: {{ forma.valid }}
+    <br>
+    Status: {{ forma.status }}
+</pre>
+
+<hr>
+
+<pre>
+    {{ forma.value | json }}
+</pre>
